@@ -1,3 +1,20 @@
+# Usage
+
+```
+mkdir build
+cd build
+cmake ..
+make
+cd ..
+./build/CFDD <dataset> <support> <confidence> <max_antecedent_size> <algorithm> <output_file>
+```
+
+For example:
+```
+./build/CFDD Data/adult.csv 1000 0.95 5 Integrated-BFS out.txt
+```
+run the CTANE algorithm with default options and output the results to out.txt
+
 # Discovering Conditional Functional Dependencies
 
 > Based on the conference paper "Revisiting Conditional Functional Dependency Discovery: Splitting the “C” from the “FD”.", by J. Rammelaere and F. Geerts, to be published in the Joint European Conference on Machine Learning and Knowledge Discovery in Databases (ECML PKDD 2018). Code by Joeri Rammelaere.

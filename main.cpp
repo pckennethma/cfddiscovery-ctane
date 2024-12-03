@@ -8,7 +8,7 @@
 #include "algorithms/cfddiscovery.h"
 
 int main(int argc, char *argv[]) {
-    if (argc == 5 || argc == 6) {
+    if (argc == 5 || argc == 6 || argc == 7) {
         std::ifstream dataFile(argv[1]);
         if (!dataFile.good()) {
             std::cout << "[ERROR] File not found: " << argv[1] << std::endl;
@@ -69,11 +69,21 @@ int main(int argc, char *argv[]) {
         else if (strcmp(argv[5], "Integrated-BFS") == 0) {
             cfdd.ctane(supp, maxSize, conf);
         }
+        else {
+            std::cout << "[ERROR] Unrecognized algorithm: " << argv[5] << std::endl;
+            return -1;
+        }
         auto t2 = std::chrono::high_resolution_clock::now();
         auto time = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
         CFDList cfds = cfdd.getCFDs();
         for (const auto& c : cfds) {
             Output::printCFD(c, db);
+        }
+        if (argc == 7) {
+            std::ofstream outFile(argv[6]);
+            for (const auto& c : cfds) {
+                Output::printCFD(c, db, outFile);
+            }
         }
         std::cout << "Mined " << cfds.size() << " cfds in " << time << " milliseconds" << std::endl;
     }
